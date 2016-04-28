@@ -24,12 +24,12 @@ public class GameEngine extends JFrame {
     private int updateSpeed = 1000;
 
 
-    public GameEngine(int width, int height, double percent, int pixelSize) throws IllegalArgumentException{
+    public GameEngine(int width, int height, double percent, int pixelSize) throws IllegalArgumentException {
         if (width <= 0 || height <= 0)
             throw new IllegalArgumentException("Width or height can`t be less or equal zero!");
-        if(percent < 0 || percent > 1)
+        if (percent < 0 || percent > 1)
             throw new IllegalArgumentException("Percent should be [0,1]!");
-        if(pixelSize < 1 || pixelSize > 8)
+        if (pixelSize < 1 || pixelSize > 8)
             throw new IllegalArgumentException("Pixel size should be [1,8]!");
 
         this.generation = getCellArray(width, height, percent);
@@ -49,17 +49,18 @@ public class GameEngine extends JFrame {
     }
 
     public void start() throws InterruptedException {
-        while (true) {
+        while (getAliveCount() > 0) {
             frame.setTitle("GAME OF LIFE: " + toString());
             frame.setContentPane(view);
             Thread.sleep(updateSpeed);
             getNextGeneration();
             frame.validate();
         }
+        System.exit(0);
     }
 
     public void setUpdateSpeed(int updateSpeed) {
-        if(updateSpeed < 0)
+        if (updateSpeed < 0)
             throw new IllegalArgumentException("Speed should be more 0!");
         this.updateSpeed = updateSpeed;
     }
