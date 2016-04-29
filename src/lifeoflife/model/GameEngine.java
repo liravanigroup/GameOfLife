@@ -103,11 +103,19 @@ public class GameEngine extends JFrame {
         for (Cell[] cells : generation) {
             for (Cell cell : cells) {
                 cell.updateCellStain();
+            }
+            y++;
+            x = 0;
+        }
+        y = 0; x = 0;
+        for (Cell[] cells : generation) {
+            for (Cell cell : cells) {
                 nextGeneration[y][x] = new Cell(cell.isAlive(), getNeighborsState(generation, x++, y));
             }
             y++;
             x = 0;
         }
+
         generation = nextGeneration;
     }
 
